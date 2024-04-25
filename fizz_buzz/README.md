@@ -1,6 +1,6 @@
 # FizzBuzz
 LeetCode: https://leetcode.com/problems/fizz-buzz/description/
-CodeWars: https://www.codewars.com/kata/5300901726d12b80e8000498
+Codewars: https://www.codewars.com/kata/5300901726d12b80e8000498
 
 ---
 
