@@ -3,7 +3,7 @@ import 'package:tennis_score/constant/player_names.dart';
 import 'package:tennis_score/enums/player.dart';
 
 /// `TennisGame` class is used to simulate a tennis game.
-class SimpleTennisGame implements TennisGame {
+class SimpleTennisGameImp implements TennisGame {
   /// `_scoreNames` is a list of score names in a tennis game.
   static const List<String> _scoreNames = ['love', 'fifteen', 'thirty', 'forty'];
 
