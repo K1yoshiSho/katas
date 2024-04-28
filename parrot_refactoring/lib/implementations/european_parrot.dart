@@ -2,7 +2,7 @@ part of '../parrot_refactoring.dart';
 
 /// Represents a European type of parrot.
 class EuropeanParrot extends Parrot {
-  EuropeanParrot({required double voltage, required bool isNailed}) : super(voltage: voltage, isNailed: isNailed);
+  const EuropeanParrot();
 
   @override
 

@@ -2,24 +2,24 @@ import 'package:parrot_speed/parrot_refactoring.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Parrot Tests', () {
+  group('Parrot Refactoring Tests:', () {
     test('Speed of European Parrot', () {
-      final parrot = EuropeanParrot(voltage: 0.0, isNailed: false);
+      final parrot = EuropeanParrot();
       expect(parrot.speed, 12.0);
     });
 
     test('Speed of African Parrot with one coconut', () {
-      final parrot = AfricanParrot(numberOfCoconuts: 1, voltage: 0.0, isNailed: false);
+      final parrot = AfricanParrot(numberOfCoconuts: 1);
       expect(parrot.speed, 3.0);
     });
 
     test('Speed of African Parrot with two coconuts', () {
-      final parrot = AfricanParrot(numberOfCoconuts: 2, voltage: 0.0, isNailed: false);
+      final parrot = AfricanParrot(numberOfCoconuts: 2);
       expect(parrot.speed, 0.0);
     });
 
     test('Speed of African Parrot with no coconuts', () {
-      final parrot = AfricanParrot(numberOfCoconuts: 0, voltage: 0.0, isNailed: false);
+      final parrot = AfricanParrot(numberOfCoconuts: 0);
       expect(parrot.speed, 12.0);
     });
 

@@ -5,7 +5,7 @@ class AfricanParrot extends Parrot {
   final int numberOfCoconuts; // Number of coconuts carried, which affects the parrot's speed.
   static const double loadFactor = 9.0; // The factor by which speed is reduced per coconut.
 
-  AfricanParrot({required this.numberOfCoconuts, required double voltage, required bool isNailed}) : super(voltage: voltage, isNailed: isNailed);
+  const AfricanParrot({required this.numberOfCoconuts});
 
   @override
 
