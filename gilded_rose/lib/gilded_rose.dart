@@ -1,7 +1,11 @@
-class GildedRose {
-  List<Item> items;
+part 'models/item.dart';
 
-  GildedRose(this.items);
+final class GildedRose {
+  final List<Item> items;
+
+  GildedRose({
+    required this.items,
+  });
 
   void updateQuality() {
     for (int i = 0; i < items.length; i++) {
@@ -54,15 +58,4 @@ class GildedRose {
       }
     }
   }
-}
-
-final class Item {
-  String name;
-  int sellIn;
-  int quality;
-
-  Item(this.name, this.sellIn, this.quality);
-
-  @override
-  String toString() => '$name, $sellIn, $quality';
 }

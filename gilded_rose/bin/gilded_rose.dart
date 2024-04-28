@@ -1,8 +1,6 @@
 import 'package:gilded_rose/gilded_rose.dart';
 
 void main(List<String> args) {
-  print("OMGHAI!");
-
   var items = [
     Item("+5 Dexterity Vest", 10, 20),
     Item("Aged Brie", 2, 0),
@@ -16,7 +14,7 @@ void main(List<String> args) {
     Item("Conjured Mana Cake", 3, 6)
   ];
 
-  GildedRose app = GildedRose(items);
+  GildedRose app = GildedRose(items: items);
 
   int days = 2;
   if (args.isNotEmpty) {
