@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of '../tennis_score_test.dart';
 
 /// `allTestScenarios` is a list of test scenarios.
 const List<TennisScenario> allTestScenarios = [

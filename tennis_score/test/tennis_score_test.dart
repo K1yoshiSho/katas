@@ -5,12 +5,11 @@ import 'package:tennis_score/constant/all_scenarios.dart';
 import 'package:tennis_score/enums/player.dart';
 import 'package:tennis_score/simple_variant/tennis_score.dart';
 import 'package:tennis_score/tennis_score.dart';
-// import 'package:tennis_score/tennis_score.dart';
 import 'package:test/test.dart';
 
 part 'src/all_test_scenarios.dart';
 part 'src/tennis_model.dart';
-part 'src/tennis_score_test.dart';
+part 'src/check_all_scenarios.dart';
 
 void main() {
   group('Main: Check tennis score scenario:', () {

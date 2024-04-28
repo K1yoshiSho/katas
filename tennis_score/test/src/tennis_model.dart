@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of '../tennis_score_test.dart';
 
 /// `TennisScenario` class is a model class that holds the player scores and the expected game score.
 final class TennisScenario {

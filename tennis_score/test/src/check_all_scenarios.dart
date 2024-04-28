@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of '../tennis_score_test.dart';
 
 /// Function `_checkAllScenarios`
 ///
