@@ -1,7 +1,6 @@
-name: gilded_rose
+name: approval_dart
 description: A sample command-line application.
 version: 1.0.0
-publish_to: 'none'
 # repository: https://github.com/my_org/my_repo
 
 environment:
@@ -10,8 +9,6 @@ environment:
 # Add regular dependencies here.
 dependencies:
   # path: ^1.8.0
-  approval_dart:
-    path: ../approval_dart
 
 dev_dependencies:
   lints: ^2.1.0
