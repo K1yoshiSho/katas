@@ -8,6 +8,6 @@ void main() {
 
     GildedRose app = GildedRose(items);
     app.updateQuality();
-    expect("too", app.items[0].name);
+    expect("foo, -1, 0", app.items[0].toString());
   });
 }
