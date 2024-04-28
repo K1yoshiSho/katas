@@ -1,2 +1,4 @@
-Solving coding katas in Dart language using TDD
-Coverage *(Change name of file for actual)*: dart test --coverage="coverage" && format_coverage -l -i coverage/test/gilded_rose_test.dart.vm.json -o coverage/lcov.info  --report-on=lib
+## Solving coding katas in Dart language using TDD   
+
+### Coverage
+**Use**: `dart run test --coverage=./coverage && dart pub global run coverage:format_coverage --packages=.dart_tool/package_config.json --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage`
