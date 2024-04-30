@@ -1,0 +1,12 @@
+part of '../gilded_rose.dart';
+
+final class AgedBrie extends Item {
+  AgedBrie({
+    required int sellIn,
+    required int quality,
+  }) : super(
+          Item.agedBrie,
+          sellIn: sellIn,
+          quality: quality,
+        );
+}

@@ -14,13 +14,13 @@ void main() {
 }
 
 void testItemUpdate(Map<String, dynamic> map) {
-  final actualItem = Item(
+  final actualItem = Item.makeItem(
     map['initial']['name'],
     sellIn: map['initial']['sellIn'],
     quality: map['initial']['quality'],
   );
 
-  final expectedItem = Item(
+  final expectedItem = Item.makeItem(
     map['expected']['name'],
     sellIn: map['expected']['sellIn'],
     quality: map['expected']['quality'],

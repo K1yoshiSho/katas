@@ -1,4 +1,8 @@
 part 'models/item.dart';
+part 'models/aged_brie.dart';
+part 'models/backstage_passes.dart';
+part 'models/conjured.dart';
+part 'models/sulfuras.dart';
 
 final class GildedRose {
   final List<Item> items;
@@ -12,12 +16,24 @@ final class GildedRose {
   }
 
   void _updateQuality(Item item) {
-    if (item.name == "Aged Brie") {
-      _agedBrie(item);
-    } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-      _backstagePassesTAFKAL80ETC(item);
-    } else if (item.name != "Sulfuras, Hand of Ragnaros") {
+    if (item.name == Item.conjuredManaCake) {
+      _updateForConjuredManaCake(item);
+    } else if (item.name == Item.agedBrie) {
+      _updateForAgedBrie(item);
+    } else if (item.name == Item.backstagePasses) {
+      _updateBackstagePassesTAFKAL80ETC(item);
+    } else if (item.name != Item.sulfuras) {
       _updateForNotLegendaryItems(item);
+    }
+  }
+
+  void _updateForConjuredManaCake(Item item) {
+    if (item.quality > 0) {
+      item.quality = item.quality - 2;
+    }
+    item.sellIn = item.sellIn - 1;
+    if (item.sellIn < 0 && item.quality > 0) {
+      item.quality = item.quality - 2;
     }
   }
 
@@ -31,7 +47,7 @@ final class GildedRose {
     }
   }
 
-  void _backstagePassesTAFKAL80ETC(Item item) {
+  void _updateBackstagePassesTAFKAL80ETC(Item item) {
     if (item.quality < 50) {
       item.quality = item.quality + 1;
 
@@ -51,7 +67,7 @@ final class GildedRose {
     }
   }
 
-  void _agedBrie(Item item) {
+  void _updateForAgedBrie(Item item) {
     if (item.quality < 50) {
       item.quality = item.quality + 1;
     }
