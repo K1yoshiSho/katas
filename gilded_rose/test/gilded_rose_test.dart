@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:approval_dart/examples/gilded_rose.dart';
+import 'package:gilded_rose/gilded_rose.dart';
 import 'package:test/test.dart';
 
 import 'verifier/approved_cases.g.dart';
