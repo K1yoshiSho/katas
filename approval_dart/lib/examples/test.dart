@@ -1,9 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:approval_dart/examples/approved_cases.g.dart';
 import 'package:approval_dart/examples/gilded_rose.dart';
 import 'package:test/test.dart';
-
-import 'verifier/approved_cases.g.dart';
 
 void main() {
   group('Gilded Rose Item Update Tests', () {

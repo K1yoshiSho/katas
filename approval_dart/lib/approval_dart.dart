@@ -15,7 +15,7 @@ final class ApprovalDart {
     Uri scriptUri = Platform.script;
     String scriptPath = scriptUri.toFilePath();
     String directoryPath = scriptPath.substring(0, scriptPath.lastIndexOf('/') + 1);
-    return "${directoryPath}approved_cases.json";
+    return "${directoryPath}approved_cases.g.dart";
   }
 
   /// Executes tests on all combinations of given input sets.
@@ -29,7 +29,7 @@ final class ApprovalDart {
     List<Map<String, dynamic>> approvedCases = [];
     for (int i = 0; i < actualItems.length; i++) {
       approvedCases.add({
-        "actual": actualItems[i].toJson(),
+        "initial": actualItems[i].toJson(),
         "expected": expectedItems[i].toJson(),
       });
     }
@@ -37,11 +37,11 @@ final class ApprovalDart {
     File file = File(filePath ?? _defaultPath);
 
     var buffer = StringBuffer();
-    buffer.writeln("[");
+    buffer.writeln("const approvedCases = [");
     for (var testCase in approvedCases) {
       buffer.writeln("  ${jsonEncode(testCase)}${testCase == approvedCases.last ? "" : ","}");
     }
-    buffer.writeln("]");
+    buffer.writeln("];");
     file.writeAsStringSync(buffer.toString());
   }
 

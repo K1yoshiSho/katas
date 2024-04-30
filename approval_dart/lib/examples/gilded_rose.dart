@@ -28,8 +28,8 @@ void main() {
       expectedItems.add(Item(itemName, sellIn: testItem.sellIn, quality: testItem.quality));
     }
 
-    // ApprovalDart.saveApprovedCases(actualItems, expectedItems);
-    // print(ApprovalDart.isValuesApproved());
+    ApprovalDart.saveApprovedCases(actualItems, expectedItems);
+
     readValues();
   });
 }
