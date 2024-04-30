@@ -1,4 +1,4 @@
-part of '../gilded_rose.dart';
+part of '../../gilded_rose.dart';
 
 final class ConjuredManaCake extends Item {
   ConjuredManaCake({
@@ -9,4 +9,14 @@ final class ConjuredManaCake extends Item {
           sellIn: sellIn,
           quality: quality,
         );
+
+  @override
+  updateQuality() {
+    degrade(by: 2);
+    advanceOneDay();
+
+    if (isExpired) {
+      degrade(by: 2);
+    }
+  }
 }

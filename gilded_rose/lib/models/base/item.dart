@@ -1,4 +1,4 @@
-part of '../gilded_rose.dart';
+part of '../../gilded_rose.dart';
 
 final class Item {
   final String name;
@@ -52,15 +52,33 @@ final class Item {
     return 'Item{name: $name, sellIn: $sellIn, quality: $quality}';
   }
 
-  void _updateForAgedBrie() {
-    if (quality < 50) {
-      quality = quality + 1;
+  void updateQuality() {
+    degrade(by: 1);
+    advanceOneDay();
+    if (isExpired) {
+      degrade(by: 1);
     }
+  }
 
+  bool get isExpired => sellIn < 0;
+
+  void degrade({required int by}) {
+    if (quality > 0) {
+      if (quality - by >= 0) {
+        quality = quality - by;
+      } else {
+        quality = 0;
+      }
+    }
+  }
+
+  void upgrade({
+    required int by,
+  }) {
+    quality = quality + by;
+  }
+
+  void advanceOneDay() {
     sellIn = sellIn - 1;
-
-    if (sellIn < 0 && quality < 50) {
-      quality = quality + 1;
-    }
   }
 }

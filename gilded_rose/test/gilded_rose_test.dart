@@ -4,10 +4,17 @@ import 'package:gilded_rose/gilded_rose.dart';
 import 'package:test/test.dart';
 
 import 'verifier/approved_cases.g.dart';
+import 'verifier/conjured_cases.g.dart';
 
 void main() {
-  group('Gilded Rose Item Update Tests', () {
+  group('Gilded Rose |', () {
     for (var test in approvedCases) {
+      testItemUpdate(test);
+    }
+  });
+
+  group('Gilded Rose | Conjured Tests:', () {
+    for (var test in conjuredCases) {
       testItemUpdate(test);
     }
   });

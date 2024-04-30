@@ -12,10 +12,15 @@ final class ApprovalDart {
 
   /// Initializes and returns the default path based on the script's directory.
   static String _initializeDefaultPath() {
+    String path = directoryPath();
+    return "${path}approved_cases.g.dart";
+  }
+
+  static String directoryPath() {
     Uri scriptUri = Platform.script;
     String scriptPath = scriptUri.toFilePath();
     String directoryPath = scriptPath.substring(0, scriptPath.lastIndexOf('/') + 1);
-    return "${directoryPath}approved_cases.g.dart";
+    return directoryPath;
   }
 
   /// Executes tests on all combinations of given input sets.
@@ -25,7 +30,7 @@ final class ApprovalDart {
   }
 
   /// Saves approved test cases to a Dart file.
-  static void saveApprovedCases(List<dynamic> actualItems, List<dynamic> expectedItems, {String? filePath}) {
+  static void saveApprovedCases(List<dynamic> actualItems, List<dynamic> expectedItems, {String? filePath, String? fileName}) {
     List<Map<String, dynamic>> approvedCases = [];
     for (int i = 0; i < actualItems.length; i++) {
       approvedCases.add({
@@ -33,11 +38,11 @@ final class ApprovalDart {
         "expected": expectedItems[i].toJson(),
       });
     }
-
-    File file = File(filePath ?? _defaultPath);
+    final String name = fileName != null ? _toCamelCaseFromSnakeCase(fileName.replaceAll(".g.dart", "")) : "approvedCases";
+    File file = File(filePath ?? (fileName != null ? directoryPath() + fileName : _defaultPath));
 
     var buffer = StringBuffer();
-    buffer.writeln("const approvedCases = [");
+    buffer.writeln("const $name = [");
     for (var testCase in approvedCases) {
       buffer.writeln("  ${jsonEncode(testCase)}${testCase == approvedCases.last ? "" : ","}");
     }
@@ -77,4 +82,13 @@ Iterable<List<T>> _cartesianProduct<T>(List<List<T>> lists) {
     result = result.expand((x) => list.map((y) => [...x, y]));
   }
   return result;
+}
+
+String _toCamelCaseFromSnakeCase(String snakeCase) {
+  List<String> parts = snakeCase.split('_');
+  String camelCase = parts[0];
+  for (int i = 1; i < parts.length; i++) {
+    camelCase += parts[i].substring(0, 1).toUpperCase() + parts[i].substring(1);
+  }
+  return camelCase;
 }

@@ -1,4 +1,4 @@
-part of '../gilded_rose.dart';
+part of '../../gilded_rose.dart';
 
 final class SulfurasHandOfRagnaros extends Item {
   SulfurasHandOfRagnaros({
@@ -9,4 +9,9 @@ final class SulfurasHandOfRagnaros extends Item {
           sellIn: sellIn,
           quality: quality,
         );
+
+  @override
+  updateQuality() {
+    // Sulfuras never has to be sold or decreases in quality
+  }
 }
