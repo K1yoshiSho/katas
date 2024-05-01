@@ -8,7 +8,7 @@ class TripService {
   User? loggedInUser;
 
   Future<List<Trip>?> getTripsByUser(User user) async {
-    List<Trip> tripList = [];
+    List<Trip>? tripList;
 
     loggedInUser = await getCurrentUser();
 
@@ -38,7 +38,7 @@ class TripService {
     }
   }
 
-  Future<List<Trip>> findTripsFor(User user) async {
+  Future<List<Trip>?> findTripsFor(User user) async {
     try {
       return await TripDAO.findTripsByUser(user);
     } catch (e) {

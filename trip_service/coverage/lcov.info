@@ -16,7 +16,6 @@ LH:5
 end_of_record
 SF:/Users/yelamanyelmuratov/Development/Coding katas/katas/trip_service/lib/trip_service.dart
 DA:10,1
-DA:11,1
 DA:13,2
 DA:17,1
 DA:18,2
@@ -26,8 +25,8 @@ DA:33,0
 DA:35,0
 DA:41,0
 DA:43,0
-LF:11
-LH:7
+LF:10
+LH:6
 end_of_record
 SF:/Users/yelamanyelmuratov/Development/Coding katas/katas/trip_service/lib/src/trip_dao.dart
 DA:6,0
