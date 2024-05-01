@@ -22,7 +22,7 @@ void main() {
       }
     });
 
-    test('Test user with no friends', () async {
+    test('Test friend with no trips', () async {
       _tripService.loggedInUser = User();
 
       final trips = await _tripService.getTripsByUser(_dummyUser);
