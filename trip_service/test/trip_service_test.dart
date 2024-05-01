@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:trip_service/src/enums/trip_service_error_type.dart';
+import 'package:trip_service/src/enums/unit_tests_error_type.dart';
 import 'package:trip_service/src/models/user.dart';
 import 'package:trip_service/trip_service.dart';
 
@@ -22,15 +23,26 @@ void main() {
       }
     });
 
-    test('Test friend with no trips', () async {
-      final friend = User();
-      final user = User();
-      user.addFriend(friend);
-      _tripService.loggedInUser = user;
+    test('Test user with no friends', () async {
+      _tripService.loggedInUser = User();
 
       final trips = await _tripService.getTripsByUser(_dummyUser);
 
       expect(trips, isEmpty);
+    });
+
+    test('Test friend with no trips', () async {
+      try {
+        final user = User();
+        final friend = User();
+
+        friend.addFriend(user);
+        _tripService.loggedInUser = user;
+
+        await _tripService.getTripsByUser(friend);
+      } catch (e) {
+        expect(e, UnitTestErrorType.dependendClassCallDuringUnitTest);
+      }
     });
   });
 }

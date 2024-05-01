@@ -1,30 +1,33 @@
 SF:/Users/yelamanyelmuratov/Development/Coding katas/katas/trip_service/lib/src/models/user.dart
 DA:7,1
 DA:8,1
-DA:11,0
-DA:12,0
+DA:11,1
+DA:12,2
 DA:15,0
 DA:16,0
 DA:19,0
 DA:20,0
-DA:23,0
+DA:23,1
 DA:24,0
 DA:26,0
 DA:27,0
 LF:12
-LH:2
+LH:5
 end_of_record
 SF:/Users/yelamanyelmuratov/Development/Coding katas/katas/trip_service/lib/trip_service.dart
-DA:8,1
-DA:9,1
 DA:10,1
-DA:15,1
-DA:16,0
-DA:22,0
-DA:30,0
-DA:32,0
-LF:8
-LH:4
+DA:11,1
+DA:13,2
+DA:17,1
+DA:18,2
+DA:19,2
+DA:25,1
+DA:33,0
+DA:35,0
+DA:41,0
+DA:43,0
+LF:11
+LH:7
 end_of_record
 SF:/Users/yelamanyelmuratov/Development/Coding katas/katas/trip_service/lib/src/trip_dao.dart
 DA:6,0

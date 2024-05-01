@@ -22,7 +22,7 @@ class TripService {
         }
       }
       if (isFriend) {
-        tripList = await TripDAO.findTripsByUser(user);
+        tripList = await findTripsFor(user);
       }
       return tripList;
     } else {
@@ -33,6 +33,14 @@ class TripService {
   Future<User?> getCurrentUser() async {
     try {
       return await UserSession.instance.getLoggedUser();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Trip>> findTripsFor(User user) async {
+    try {
+      return await TripDAO.findTripsByUser(user);
     } catch (e) {
       rethrow;
     }
