@@ -1,32 +1,33 @@
 import 'package:test/test.dart';
 import 'package:trip_service/src/enums/trip_service_error_type.dart';
-import 'package:trip_service/src/enums/unit_tests_error_type.dart';
 import 'package:trip_service/src/models/user.dart';
 import 'package:trip_service/trip_service.dart';
 
 import 'test_trip_service.dart';
 
 final _dummyUser = User();
+late TripService _tripService;
 
 void main() {
   group('TripService |', () {
-    test('Test getTripsByUser returns TripServiceErrorType.userNotLoggedIn exception', () async {
-      final tripService = TestableTripService();
+    setUp(() {
+      _tripService = TestableTripService();
+    });
 
+    test('Test getTripsByUser returns TripServiceErrorType.userNotLoggedIn exception', () async {
       try {
-        await tripService.getTripsByUser(_dummyUser);
+        await _tripService.getTripsByUser(_dummyUser);
       } catch (e) {
         expect(e, TripServiceErrorType.userNotLoggedIn);
       }
     });
 
     test('Test user with no friends', () async {
-      final tripService = TestableTripService();
-      tripService.loggedInUser = User();
+      _tripService.loggedInUser = User();
 
-      final trips = await tripService.getTripsByUser(_dummyUser);
+      final trips = await _tripService.getTripsByUser(_dummyUser);
 
-      expect(trips, null);
+      expect(trips, isEmpty);
     });
   });
 }

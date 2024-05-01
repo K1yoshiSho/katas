@@ -5,15 +5,18 @@ import 'package:trip_service/src/models/user.dart';
 import 'package:trip_service/src/user_session.dart';
 
 class TripService {
+  User? loggedInUser;
+
   Future<List<Trip>?> getTripsByUser(User user) async {
-    List<Trip>? tripList;
-    User? loggedUser = await getCurrentUser();
+    List<Trip> tripList = [];
+
+    loggedInUser = await getCurrentUser();
 
     bool isFriend = false;
 
-    if (loggedUser != null) {
+    if (loggedInUser != null) {
       for (User friend in user.getFriends()) {
-        if (friend == loggedUser) {
+        if (friend == loggedInUser) {
           isFriend = true;
           break;
         }
