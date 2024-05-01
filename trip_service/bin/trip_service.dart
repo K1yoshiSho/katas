@@ -1,5 +1,17 @@
-import 'package:trip_service/trip_service.dart' as trip_service;
+import 'package:trip_service/trip_service.dart';
+import 'package:trip_service/src/models/user.dart';
 
 void main(List<String> arguments) {
-  print('Hello world: ${trip_service.calculate()}!');
+  final tripService = TripService();
+  final user = User();
+
+  tripService.getTripsByUser(user).then((trips) {
+    if (trips != null) {
+      print('Trips found: $trips');
+    } else {
+      print('No trips found for the user');
+    }
+  }).catchError((error) {
+    print('Error: $error');
+  });
 }

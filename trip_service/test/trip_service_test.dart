@@ -1,8 +1,5 @@
-import 'package:trip_service/trip_service.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('calculate', () {
-    expect(calculate(), 42);
-  });
+  test('Trip Service test', () {});
 }
