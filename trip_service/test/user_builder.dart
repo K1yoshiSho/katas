@@ -1,24 +1,29 @@
 import 'package:trip_service/src/models/trip.dart';
 import 'package:trip_service/src/models/user.dart';
 
+/// Builder pattern for [User] class. It allows to create a [User] object with friends and trips.
 final class UserBuilder {
-  List<User> friends = [];
-  List<Trip> trips = [];
+  List<User> _friends = [];
+  List<Trip> _trips = [];
 
   UserBuilder addFriends(List<User> friends) {
-    this.friends = friends;
+    _friends = friends;
     return this;
   }
 
   UserBuilder addTrips(List<Trip> trips) {
-    this.trips = trips;
+    _trips = trips;
     return this;
   }
 
   User build() {
     final user = User();
-    addFriends(friends);
-    addTrips(trips);
+    for (final friend in _friends) {
+      user.addFriend(friend);
+    }
+    for (final trip in _trips) {
+      user.addTrip(trip);
+    }
     return user;
   }
 }

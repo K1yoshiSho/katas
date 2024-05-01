@@ -10,7 +10,6 @@ import 'user_builder.dart';
 void main() {
   late User dummyUser;
   late User loggedInUser;
-  late User friend;
 
   late TestableTripService tripService;
 
@@ -26,10 +25,8 @@ void main() {
       canadaTrip = Trip();
       dummyUser = User();
       loggedInUser = User();
-      friend = User();
+
       tripService.loggedInUser = loggedInUser;
-      friend.addFriend(loggedInUser);
-      friend.addFriend(dummyUser);
     });
 
     test('Test current user', () async {
@@ -55,6 +52,7 @@ void main() {
 
     test('Test friend with no trips', () async {
       try {
+        final friend = UserBuilder().addFriends([loggedInUser, dummyUser]).build();
         await tripService.getTripsByUser(friend);
       } catch (e) {
         expect(e, UnitTestErrorType.dependendClassCallDuringUnitTest);
@@ -62,9 +60,7 @@ void main() {
     });
 
     test('Test friend with trips', () async {
-      friend.addTrip(japanTrip);
-      friend.addTrip(usaTrip);
-      friend.addTrip(canadaTrip);
+      final friend = UserBuilder().addFriends([loggedInUser, dummyUser]).addTrips([japanTrip, usaTrip, canadaTrip]).build();
 
       final result = await tripService.getTripsByUser(friend);
 
@@ -72,7 +68,6 @@ void main() {
     });
 
     test('Test non_friend with trips', () async {
-      friend = UserBuilder().addFriends([loggedInUser, dummyUser]).addTrips([japanTrip, usaTrip, canadaTrip]).build();
       dummyUser.addTrip(japanTrip);
       dummyUser.addTrip(usaTrip);
       dummyUser.addTrip(canadaTrip);
