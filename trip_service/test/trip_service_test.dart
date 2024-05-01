@@ -5,11 +5,13 @@ import 'package:trip_service/src/models/trip.dart';
 import 'package:trip_service/src/models/user.dart';
 
 import 'test_trip_service.dart';
+import 'user_builder.dart';
 
 void main() {
   late User dummyUser;
-  late User user;
+  late User loggedInUser;
   late User friend;
+
   late TestableTripService tripService;
 
   late Trip japanTrip;
@@ -23,16 +25,17 @@ void main() {
       usaTrip = Trip();
       canadaTrip = Trip();
       dummyUser = User();
-      user = User();
+      loggedInUser = User();
       friend = User();
-      tripService.loggedInUser = user;
-      friend.addFriend(user);
+      tripService.loggedInUser = loggedInUser;
+      friend.addFriend(loggedInUser);
+      friend.addFriend(dummyUser);
     });
 
     test('Test current user', () async {
       final currentUser = await tripService.getCurrentUser();
 
-      expect(currentUser, user);
+      expect(currentUser, loggedInUser);
     });
 
     test('Test getTripsByUser returns TripServiceErrorType.userNotLoggedIn exception', () async {
@@ -52,7 +55,6 @@ void main() {
 
     test('Test friend with no trips', () async {
       try {
-        tripService.stubbedTrips = [];
         await tripService.getTripsByUser(friend);
       } catch (e) {
         expect(e, UnitTestErrorType.dependendClassCallDuringUnitTest);
@@ -60,11 +62,24 @@ void main() {
     });
 
     test('Test friend with trips', () async {
-      final trips = [japanTrip, usaTrip, canadaTrip];
-      tripService.stubbedTrips = trips;
+      friend.addTrip(japanTrip);
+      friend.addTrip(usaTrip);
+      friend.addTrip(canadaTrip);
+
       final result = await tripService.getTripsByUser(friend);
 
       expect(result, [japanTrip, usaTrip, canadaTrip]);
+    });
+
+    test('Test non_friend with trips', () async {
+      friend = UserBuilder().addFriends([loggedInUser, dummyUser]).addTrips([japanTrip, usaTrip, canadaTrip]).build();
+      dummyUser.addTrip(japanTrip);
+      dummyUser.addTrip(usaTrip);
+      dummyUser.addTrip(canadaTrip);
+
+      final result = await tripService.getTripsByUser(dummyUser);
+
+      expect(result, null);
     });
   });
 }

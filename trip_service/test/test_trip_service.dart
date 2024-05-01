@@ -4,7 +4,7 @@ import 'package:trip_service/trip_service.dart';
 
 final class TestableTripService extends TripService {
   User? loggedInUser;
-  List<Trip>? stubbedTrips;
+
   @override
   Future<User?> getCurrentUser() async {
     return loggedInUser;
@@ -12,6 +12,6 @@ final class TestableTripService extends TripService {
 
   @override
   Future<List<Trip>?> findTripsFor(User user) async {
-    return stubbedTrips;
+    return user.getTrips();
   }
 }
