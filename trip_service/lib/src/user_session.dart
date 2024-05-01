@@ -6,11 +6,11 @@ class UserSession {
 
   static final UserSession instance = UserSession._privateConstructor();
 
-  Future<bool> isUserLoggedIn(User user) async {
+  bool isUserLoggedIn(User user) {
     throw UnitTestErrorType.dependendClassCallDuringUnitTest;
   }
 
-  Future<User?> getLoggedUser() async {
+  User? getLoggedUser() {
     throw UnitTestErrorType.dependendClassCallDuringUnitTest;
   }
 }

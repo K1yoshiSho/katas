@@ -3,7 +3,7 @@ import 'package:trip_service/src/models/trip.dart';
 import 'package:trip_service/src/models/user.dart';
 
 class TripDAO {
-  static Future<List<Trip>> findTripsByUser(User user) async {
+  static List<Trip> findTripsByUser(User user) {
     throw UnitTestErrorType.dependendClassCallDuringUnitTest;
   }
 }

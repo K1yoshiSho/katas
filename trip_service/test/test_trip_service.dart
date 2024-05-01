@@ -6,12 +6,10 @@ final class TestableTripService extends TripService {
   User? loggedInUser;
 
   @override
-  Future<User?> getCurrentUser() async {
-    return loggedInUser;
-  }
+  User? get getCurrentUser => loggedInUser;
 
   @override
-  Future<List<Trip>?> findTripsFor(User user) async {
+  List<Trip>? findTripsFor(User user) {
     return user.getTrips();
   }
 }

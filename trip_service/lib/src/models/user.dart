@@ -20,6 +20,19 @@ class User {
     _userTrips.add(trip);
   }
 
+  bool isFriendsWith({
+    required User user,
+  }) {
+    bool isFriend = false;
+    for (User friend in getFriends()) {
+      if (friend == user) {
+        isFriend = true;
+        break;
+      }
+    }
+    return isFriend;
+  }
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is User && runtimeType == other.runtimeType;
 

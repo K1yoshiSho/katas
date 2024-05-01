@@ -30,7 +30,7 @@ void main() {
     });
 
     test('Test current user', () async {
-      final currentUser = await tripService.getCurrentUser();
+      final currentUser = tripService.getCurrentUser;
 
       expect(currentUser, loggedInUser);
     });
