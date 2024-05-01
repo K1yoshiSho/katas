@@ -4,9 +4,9 @@ import 'package:trip_service/src/trip_dao.dart';
 import 'package:trip_service/src/models/user.dart';
 import 'package:trip_service/src/user_session.dart';
 
-base class TripService {
-  Future<List<Trip>?> getTripsByUser(User user) async {
-    User? loggedInUser = getCurrentUser;
+class TripService {
+  Future<List<Trip>?> getTripsByUser(User user, {User? currentUser}) async {
+    User? loggedInUser = currentUser ?? UserSession.instance.getLoggedUser();
 
     if (loggedInUser == null) {
       throw TripServiceErrorType.userNotLoggedIn;
@@ -14,9 +14,5 @@ base class TripService {
     return user.isFriendsWith(user: loggedInUser) ? findTripsFor(user) : null;
   }
 
-  User? get getCurrentUser => UserSession.instance.getLoggedUser();
-
-  List<Trip>? findTripsFor(User user) {
-    return TripDAO.findTripsByUser(user);
-  }
+  List<Trip>? findTripsFor(User user) => TripDAO.findTripsBy(user);
 }

@@ -4,16 +4,12 @@ class User {
   final List<Trip> _userTrips = [];
   final List<User> _friends = [];
 
-  List<User> getFriends() {
-    return _friends;
-  }
+  List<User> get friends => _friends;
+
+  List<Trip> get trips => _userTrips;
 
   void addFriend(User friend) {
     _friends.add(friend);
-  }
-
-  List<Trip> getTrips() {
-    return _userTrips;
   }
 
   void addTrip(Trip trip) {
@@ -24,7 +20,7 @@ class User {
     required User user,
   }) {
     bool isFriend = false;
-    for (User friend in getFriends()) {
+    for (User friend in friends) {
       if (friend == user) {
         isFriend = true;
         break;

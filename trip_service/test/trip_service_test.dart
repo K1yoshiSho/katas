@@ -4,75 +4,72 @@ import 'package:trip_service/src/enums/unit_tests_error_type.dart';
 import 'package:trip_service/src/models/trip.dart';
 import 'package:trip_service/src/models/user.dart';
 
-import 'test_trip_service.dart';
+import 'package:trip_service/trip_service.dart';
+
 import 'user_builder.dart';
 
 void main() {
-  late User dummyUser;
-  late User loggedInUser;
+  late final User anotherUser;
+  late final User loggedInUser;
 
-  late TestableTripService tripService;
+  late final TripService tripService;
 
-  late Trip japanTrip;
-  late Trip usaTrip;
-  late Trip canadaTrip;
+  late final Trip japanTrip;
+  late final Trip usaTrip;
+  late final Trip canadaTrip;
 
   group('TripService |', () {
-    setUp(() {
-      tripService = TestableTripService();
+    setUpAll(() {
+      tripService = TripService();
+
       japanTrip = Trip();
       usaTrip = Trip();
       canadaTrip = Trip();
-      dummyUser = User();
-      loggedInUser = User();
 
-      tripService.loggedInUser = loggedInUser;
+      loggedInUser = User();
+      anotherUser = UserBuilder().addTrips([japanTrip, usaTrip, canadaTrip]).build();
     });
 
-    test('Test current user', () async {
-      final currentUser = tripService.getCurrentUser;
-
-      expect(currentUser, loggedInUser);
+    tearDownAll(() {
+      anotherUser.friends.clear();
+      loggedInUser.friends.clear();
+      anotherUser.trips.clear();
+      loggedInUser.trips.clear();
     });
 
     test('Test getTripsByUser returns TripServiceErrorType.userNotLoggedIn exception', () async {
       try {
-        tripService.loggedInUser = null;
-        await tripService.getTripsByUser(dummyUser);
+        await tripService.getTripsByUser(anotherUser, currentUser: loggedInUser);
       } catch (e) {
-        expect(e, TripServiceErrorType.userNotLoggedIn);
+        throwsA(equals(TripServiceErrorType.userNotLoggedIn));
       }
     });
 
     test('Test user with no friends', () async {
-      final trips = await tripService.getTripsByUser(dummyUser);
+      final trips = await tripService.getTripsByUser(anotherUser, currentUser: loggedInUser);
 
       expect(trips, null);
     });
 
     test('Test friend with no trips', () async {
       try {
-        final friend = UserBuilder().addFriends([loggedInUser, dummyUser]).build();
+        final friend = UserBuilder().addFriends([loggedInUser, anotherUser]).build();
         await tripService.getTripsByUser(friend);
       } catch (e) {
-        expect(e, UnitTestErrorType.dependendClassCallDuringUnitTest);
+        throwsA(equals(UnitTestErrorType.dependendClassCallDuringUnitTest));
       }
     });
 
     test('Test friend with trips', () async {
-      final friend = UserBuilder().addFriends([loggedInUser, dummyUser]).addTrips([japanTrip, usaTrip, canadaTrip]).build();
+      final friend = UserBuilder().addFriends([loggedInUser, anotherUser]).addTrips([japanTrip, usaTrip, canadaTrip]).build();
 
-      final result = await tripService.getTripsByUser(friend);
+      final result = await tripService.getTripsByUser(friend, currentUser: loggedInUser);
 
       expect(result, [japanTrip, usaTrip, canadaTrip]);
     });
 
     test('Test non_friend with trips', () async {
-      dummyUser.addTrip(japanTrip);
-      dummyUser.addTrip(usaTrip);
-      dummyUser.addTrip(canadaTrip);
-
-      final result = await tripService.getTripsByUser(dummyUser);
+      final result = await tripService.getTripsByUser(anotherUser, currentUser: loggedInUser);
 
       expect(result, null);
     });
