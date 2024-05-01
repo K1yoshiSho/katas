@@ -7,7 +7,7 @@ import 'package:trip_service/src/user_session.dart';
 class TripService {
   Future<List<Trip>?> getTripsByUser(User user) async {
     List<Trip>? tripList;
-    User? loggedUser = await UserSession.instance.getLoggedUser();
+    User? loggedUser = await getCurrentUser();
 
     bool isFriend = false;
 
@@ -24,6 +24,14 @@ class TripService {
       return tripList;
     } else {
       throw TripServiceErrorType.userNotLoggedIn;
+    }
+  }
+
+  Future<User?> getCurrentUser() async {
+    try {
+      return await UserSession.instance.getLoggedUser();
+    } catch (e) {
+      rethrow;
     }
   }
 }
