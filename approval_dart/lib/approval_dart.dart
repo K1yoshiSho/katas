@@ -29,6 +29,20 @@ final class ApprovalDart {
     testFunction.call(combinations);
   }
 
+  static void verify(String output, {String? filePath}) {
+    File file = File("/");
+    if (!file.existsSync()) {
+      file.writeAsStringSync(output);
+      print("Output has been saved as approved.");
+    } else {
+      String approvedOutput = file.readAsStringSync();
+      if (output != approvedOutput) {
+        throw Exception("Output does not match the approved file.");
+      }
+      print("Output matches the approved file.");
+    }
+  }
+
   /// Saves approved test cases to a Dart file.
   static void saveApprovedCases(List<dynamic> actualItems, List<dynamic> expectedItems, {String? filePath, String? fileName}) {
     List<Map<String, dynamic>> approvedCases = [];
