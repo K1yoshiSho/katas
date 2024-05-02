@@ -1,10 +1,13 @@
 part of '../expense_report.dart';
 
 class ExpenseReport {
-  void printReport(List<Expense> expenses) {
+  void printReport(
+    List<Expense> expenses, {
+    required DateTime date,
+  }) {
     var mealExpenses = 0;
     var totalExpenses = 0;
-    var date = DateTime.now();
+
     log('Expense Report: $date');
     for (var expense in expenses) {
       if (expense.type == ExpenseType.dinner || expense.type == ExpenseType.breakfast) {

@@ -12,6 +12,7 @@ final input = [
 ];
 void main() {
   late TestableExpenseReport expenseReport;
+  final DateTime date = DateTime.now();
 
   group('ExpenseReport', () {
     setUp(() {
@@ -19,7 +20,7 @@ void main() {
     });
 
     test('printReport', () {
-      expenseReport.printReport(input);
+      expenseReport.printReport(input, date: date);
       expect(expenseReport.logs, isNotEmpty);
     });
   });
