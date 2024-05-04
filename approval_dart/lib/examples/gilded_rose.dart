@@ -28,7 +28,7 @@ void main() {
       expectedItems.add(Item(itemName, sellIn: testItem.sellIn, quality: testItem.quality));
     }
 
-    ApprovalDart.saveApprovedCases(actualItems, expectedItems);
+    ApprovalDart.saveCases(actualItems, expectedItems);
 
     // readValues();
   });

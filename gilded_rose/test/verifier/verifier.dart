@@ -43,6 +43,6 @@ void runApprovalTests(List<List<dynamic>> testCases, {String? fileName}) {
       expectedItems.add(Item.makeItem(itemName, sellIn: testItem.sellIn, quality: testItem.quality));
     }
 
-    ApprovalDart.saveApprovedCases(initialItems, expectedItems, fileName: fileName);
+    ApprovalDart.saveCases(initialItems, expectedItems, fileName: fileName);
   });
 }

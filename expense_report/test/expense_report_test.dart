@@ -1,3 +1,4 @@
+import 'package:approval_dart/approval_dart.dart';
 import 'package:expense_report/expense_report.dart';
 import 'package:test/test.dart';
 
@@ -12,7 +13,7 @@ final input = [
 ];
 void main() {
   late TestableExpenseReport expenseReport;
-  final DateTime date = DateTime.now();
+  final DateTime date = DateTime(2022, 9, 1, 0, 0, 0, 0, 0);
 
   group('ExpenseReport', () {
     setUp(() {
@@ -21,7 +22,7 @@ void main() {
 
     test('printReport', () {
       expenseReport.printReport(input, date: date);
-      expect(expenseReport.logs, isNotEmpty);
+      ApprovalDart.verify(expenseReport.logs.join('\n'), filePath: "approved_cases.txt");
     });
   });
 }

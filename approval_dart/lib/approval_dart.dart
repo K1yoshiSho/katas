@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:test/test.dart';
 
 final class ApprovalDart {
   static final String _defaultPath = _initializeDefaultPath();
@@ -14,6 +15,11 @@ final class ApprovalDart {
   static String _initializeDefaultPath() {
     String path = directoryPath();
     return "${path}approved_cases.g.dart";
+  }
+
+  static String approvedPath() {
+    String path = directoryPath();
+    return "${path}approved_cases.txt";
   }
 
   static String directoryPath() {
@@ -30,38 +36,59 @@ final class ApprovalDart {
   }
 
   static void verify(String output, {String? filePath}) {
-    File file = File("/");
+    File file = File(filePath ?? approvedPath());
     if (!file.existsSync()) {
       file.writeAsStringSync(output);
-      print("Output has been saved as approved.");
+      print("Error: Approved file does not exist.");
     } else {
       String approvedOutput = file.readAsStringSync();
-      if (output != approvedOutput) {
+      bool isApproved = output == approvedOutput;
+      print("Output: '$output'\n\nApproved: '$approvedOutput'");
+      if (!isApproved) {
         throw Exception("Output does not match the approved file.");
       }
       print("Output matches the approved file.");
+      expect(output, equals(approvedOutput));
     }
   }
 
-  /// Saves approved test cases to a Dart file.
-  static void saveApprovedCases(List<dynamic> actualItems, List<dynamic> expectedItems, {String? filePath, String? fileName}) {
-    List<Map<String, dynamic>> approvedCases = [];
-    for (int i = 0; i < actualItems.length; i++) {
-      approvedCases.add({
-        "initial": actualItems[i].toJson(),
-        "expected": expectedItems[i].toJson(),
-      });
-    }
-    final String name = fileName != null ? _toCamelCaseFromSnakeCase(fileName.replaceAll(".g.dart", "")) : "approvedCases";
-    File file = File(filePath ?? (fileName != null ? directoryPath() + fileName : _defaultPath));
+  static void saveApprovedCase(dynamic approvedCase, {String? filePath, String? fileName}) {
+    saveCases(null, approvedCase, filePath: filePath, fileName: fileName);
+  }
 
-    var buffer = StringBuffer();
-    buffer.writeln("const $name = [");
-    for (var testCase in approvedCases) {
-      buffer.writeln("  ${jsonEncode(testCase)}${testCase == approvedCases.last ? "" : ","}");
+  /// Saves approved test cases to a Dart file.
+  static void saveCases(dynamic receivedItems, dynamic expectedItems, {String? filePath, String? fileName}) {
+    if (receivedItems is List && expectedItems is List) {
+      List<Map<String, dynamic>> approvedCases = [];
+      for (int i = 0; i < receivedItems.length; i++) {
+        approvedCases.add({
+          "received": receivedItems[i].toJson(),
+          "expected": expectedItems[i].toJson(),
+        });
+      }
+      final String name = fileName != null ? _toCamelCaseFromSnakeCase(fileName.replaceAll(".g.dart", "")) : "approvedCases";
+      File file = File(filePath ?? (fileName != null ? directoryPath() + fileName : _defaultPath));
+
+      var buffer = StringBuffer();
+      buffer.writeln("const $name = [");
+      for (var testCase in approvedCases) {
+        buffer.writeln("  ${jsonEncode(testCase)}${testCase == approvedCases.last ? "" : ","}");
+      }
+      buffer.writeln("];");
+      file.writeAsStringSync(buffer.toString());
+    } else if (expectedItems is! List && receivedItems == null) {
+      var approvedBuffer = StringBuffer();
+
+      final String approvedName = "approved_cases.txt";
+
+      approvedBuffer.writeln(expectedItems);
+
+      File approvedFile = File(filePath ?? directoryPath() + approvedName);
+
+      approvedFile.writeAsStringSync(approvedBuffer.toString());
+
+      print("Approved cases have been saved.");
     }
-    buffer.writeln("];");
-    file.writeAsStringSync(buffer.toString());
   }
 
   /// Loads approved test cases from a Dart file.
