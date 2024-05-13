@@ -14,7 +14,9 @@ part 'src/check_all_scenarios.dart';
 void main() {
   group('Main: Check tennis score scenario:', () {
     for (final tested in allTestScenarios) {
-      test('${tested.firstPlayerScore} - ${tested.secondPlayerScore} - ${tested.expectedScore}', () {
+      test(
+          '${tested.firstPlayerScore} - ${tested.secondPlayerScore} - ${tested.expectedScore}',
+          () {
         final TennisGame game = TennisGameImp();
         _checkAllScenarios(game: game, testScenario: tested);
       });
@@ -23,7 +25,9 @@ void main() {
 
   group('Simple: Check tennis score scenario:', () {
     for (final tested in allTestScenarios) {
-      test('${tested.firstPlayerScore} - ${tested.secondPlayerScore} - ${tested.expectedScore}', () {
+      test(
+          '${tested.firstPlayerScore} - ${tested.secondPlayerScore} - ${tested.expectedScore}',
+          () {
         final TennisGame game = SimpleTennisGameImp();
         _checkAllScenarios(game: game, testScenario: tested);
       });

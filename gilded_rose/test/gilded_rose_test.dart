@@ -1,44 +1,81 @@
-// ignore_for_file: depend_on_referenced_packages
-
+import 'package:approval_tests/approval_tests.dart';
 import 'package:gilded_rose/gilded_rose.dart';
 import 'package:test/test.dart';
 
-import 'verifier/approved_cases.g.dart';
-import 'verifier/conjured_cases.g.dart';
+const allTestCases = [
+  [
+    "foo",
+    "Aged Brie",
+    "Backstage passes to a TAFKAL80ETC concert",
+    "Sulfuras, Hand of Ragnaros",
+  ],
+  [-1, 0, 5, 6, 10, 11],
+  [-1, 0, 1, 49, 50]
+];
+
+const conjuredTestCases = [
+  ["Conjured Mana Cake"],
+  [-1, 0, 2],
+  [-1, 0, 1, 2],
+];
 
 void main() {
-  group('Gilded Rose |', () {
-    for (var test in approvedCases) {
-      testItemUpdate(test);
-    }
-  });
+  group('Approval Tests for Gilded Rose', () {
+    test('should verify all combinations of common test cases', () {
+      // Perform the verification for all combinations
+      Approvals.verifyAllCombinations(
+        allTestCases,
+        options: const Options(
+          comparator: IDEComparator(
+            ide: ComparatorIDE.visualStudioCode,
+          ),
+          filesPath: "test/verifier/test_cases",
+          deleteReceivedFile: true,
+        ),
+        processor: processItemCombination,
+      );
+    });
 
-  group('Gilded Rose | Conjured Tests:', () {
-    for (var test in conjuredCases) {
-      testItemUpdate(test);
-    }
+    test('should verify all combinations of conjured test cases', () {
+      // Perform the verification for conjured combinations
+      Approvals.verifyAllCombinations(
+        conjuredTestCases,
+        options: const Options(
+          comparator: IDEComparator(
+            ide: ComparatorIDE.visualStudioCode,
+          ),
+          filesPath: "test/verifier/conjured_test_cases",
+          deleteReceivedFile: true,
+        ),
+        processor: processItemCombination,
+      );
+    });
   });
 }
 
-void testItemUpdate(Map<String, dynamic> map) {
-  final actualItem = Item.makeItem(
-    map['initial']['name'],
-    sellIn: map['initial']['sellIn'],
-    quality: map['initial']['quality'],
-  );
+// Function to process each combination and generate output for verification
+String processItemCombination(Iterable<List<dynamic>> combinations) {
+  final receivedBuffer = StringBuffer();
 
-  final expectedItem = Item.makeItem(
-    map['expected']['name'],
-    sellIn: map['expected']['sellIn'],
-    quality: map['expected']['quality'],
-  );
+  for (final combination in combinations) {
+    // Extract data from the current combination
+    final String itemName = combination[0] as String;
+    final int sellIn = combination[1] as int;
+    final int quality = combination[2] as int;
 
-  test('${actualItem.name} with sellIn ${actualItem.sellIn} and quality ${actualItem.quality}', () {
-    print("Initial: ${actualItem.toString()}");
-    GildedRose app = GildedRose(items: [actualItem]);
+    // Create an Item object representing the current combination
+    final Item testItem = Item(itemName, sellIn: sellIn, quality: quality);
+
+    // Passing testItem to the application
+    final GildedRose app = GildedRose(items: [testItem]);
+
+    // Updating quality of testItem
     app.updateQuality();
 
-    print("Expected: ${expectedItem.toString()}");
-    expect(actualItem.toString(), equals(expectedItem.toString()));
-  });
+    // Adding the updated item to expectedItems
+    receivedBuffer.writeln(testItem.toString());
+  }
+
+  // Return a string representation of the updated item
+  return receivedBuffer.toString();
 }

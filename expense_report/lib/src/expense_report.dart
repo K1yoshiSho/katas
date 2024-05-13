@@ -10,7 +10,8 @@ class ExpenseReport {
 
     log('Expense Report: $date');
     for (var expense in expenses) {
-      if (expense.type == ExpenseType.dinner || expense.type == ExpenseType.breakfast) {
+      if (expense.type == ExpenseType.dinner ||
+          expense.type == ExpenseType.breakfast) {
         mealExpenses += expense.amount;
       }
       String expenseName = switch (expense.type) {
@@ -28,7 +29,8 @@ class ExpenseReport {
   }
 
   bool isOverExpensed(Expense expense) =>
-      expense.type == ExpenseType.dinner && expense.amount > 5000 || expense.type == ExpenseType.breakfast && expense.amount > 1000;
+      expense.type == ExpenseType.dinner && expense.amount > 5000 ||
+      expense.type == ExpenseType.breakfast && expense.amount > 1000;
 
   void log(Object? object) => print(object.toString());
 }

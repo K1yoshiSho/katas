@@ -30,7 +30,9 @@ class User {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is User && runtimeType == other.runtimeType;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is User && runtimeType == other.runtimeType;
 
   @override
   int get hashCode => _userTrips.hashCode ^ _friends.hashCode;

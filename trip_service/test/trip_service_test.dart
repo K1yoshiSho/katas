@@ -27,7 +27,8 @@ void main() {
       canadaTrip = Trip();
 
       loggedInUser = User();
-      anotherUser = UserBuilder().addTrips([japanTrip, usaTrip, canadaTrip]).build();
+      anotherUser =
+          UserBuilder().addTrips([japanTrip, usaTrip, canadaTrip]).build();
     });
 
     tearDownAll(() {
@@ -37,23 +38,28 @@ void main() {
       loggedInUser.trips.clear();
     });
 
-    test('Test getTripsByUser returns TripServiceErrorType.userNotLoggedIn exception', () async {
+    test(
+        'Test getTripsByUser returns TripServiceErrorType.userNotLoggedIn exception',
+        () async {
       try {
-        await tripService.getTripsByUser(anotherUser, currentUser: loggedInUser);
+        await tripService.getTripsByUser(anotherUser,
+            currentUser: loggedInUser);
       } catch (e) {
         throwsA(equals(TripServiceErrorType.userNotLoggedIn));
       }
     });
 
     test('Test user with no friends', () async {
-      final trips = await tripService.getTripsByUser(anotherUser, currentUser: loggedInUser);
+      final trips = await tripService.getTripsByUser(anotherUser,
+          currentUser: loggedInUser);
 
       expect(trips, null);
     });
 
     test('Test friend with no trips', () async {
       try {
-        final friend = UserBuilder().addFriends([loggedInUser, anotherUser]).build();
+        final friend =
+            UserBuilder().addFriends([loggedInUser, anotherUser]).build();
         await tripService.getTripsByUser(friend);
       } catch (e) {
         throwsA(equals(UnitTestErrorType.dependendClassCallDuringUnitTest));
@@ -61,15 +67,19 @@ void main() {
     });
 
     test('Test friend with trips', () async {
-      final friend = UserBuilder().addFriends([loggedInUser, anotherUser]).addTrips([japanTrip, usaTrip, canadaTrip]).build();
+      final friend = UserBuilder()
+          .addFriends([loggedInUser, anotherUser]).addTrips(
+              [japanTrip, usaTrip, canadaTrip]).build();
 
-      final result = await tripService.getTripsByUser(friend, currentUser: loggedInUser);
+      final result =
+          await tripService.getTripsByUser(friend, currentUser: loggedInUser);
 
       expect(result, [japanTrip, usaTrip, canadaTrip]);
     });
 
     test('Test non_friend with trips', () async {
-      final result = await tripService.getTripsByUser(anotherUser, currentUser: loggedInUser);
+      final result = await tripService.getTripsByUser(anotherUser,
+          currentUser: loggedInUser);
 
       expect(result, null);
     });

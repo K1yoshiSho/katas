@@ -21,15 +21,23 @@ void main() {
         Item('Aged Brie', sellIn: 2, quality: 0),
         Item('Aged Brie', sellIn: -1, quality: 4),
       ],
-      expectedResults: ["Aged Brie, 1, 50", "Aged Brie, 1, 1", "Aged Brie, -2, 6"],
+      expectedResults: [
+        "Aged Brie, 1, 50",
+        "Aged Brie, 1, 1",
+        "Aged Brie, -2, 6"
+      ],
     ),
     _Test(
       name: 'Backstage Passes to a TAFKAL80ETC concert:',
       items: [
-        Item('Backstage passes to a TAFKAL80ETC concert', sellIn: 10, quality: 10),
-        Item('Backstage passes to a TAFKAL80ETC concert', sellIn: 5, quality: 10),
-        Item('Backstage passes to a TAFKAL80ETC concert', sellIn: -1, quality: 4),
-        Item('Backstage passes to a TAFKAL80ETC concert', sellIn: 9, quality: 2),
+        Item('Backstage passes to a TAFKAL80ETC concert',
+            sellIn: 10, quality: 10),
+        Item('Backstage passes to a TAFKAL80ETC concert',
+            sellIn: 5, quality: 10),
+        Item('Backstage passes to a TAFKAL80ETC concert',
+            sellIn: -1, quality: 4),
+        Item('Backstage passes to a TAFKAL80ETC concert',
+            sellIn: 9, quality: 2),
       ],
       expectedResults: [
         "Backstage passes to a TAFKAL80ETC concert, 9, 12",
@@ -50,7 +58,8 @@ void main() {
       for (var i = 0; i < testItem.items.length; i++) {
         test('Test item $i', () {
           final app = _addItems([testItem.items[i]]);
-          expect(app.items.first.toString(), equals(testItem.expectedResults[i]));
+          expect(
+              app.items.first.toString(), equals(testItem.expectedResults[i]));
         });
       }
     });

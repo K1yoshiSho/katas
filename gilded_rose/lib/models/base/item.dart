@@ -8,7 +8,8 @@ final class Item {
   Item(this.name, {required this.sellIn, required this.quality});
 
   static const String agedBrie = 'Aged Brie';
-  static const String backstagePasses = 'Backstage passes to a TAFKAL80ETC concert';
+  static const String backstagePasses =
+      'Backstage passes to a TAFKAL80ETC concert';
   static const String sulfuras = 'Sulfuras, Hand of Ragnaros';
   static const String conjuredManaCake = 'Conjured Mana Cake';
 

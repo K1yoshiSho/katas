@@ -2,7 +2,8 @@ part of '../parrot_refactoring.dart';
 
 /// Represents a Norwegian Blue type of parrot.
 class NorwegianBlueParrot extends Parrot {
-  final double voltage; // The voltage used primarily for the Norwegian Blue parrot calculation.
+  final double
+      voltage; // The voltage used primarily for the Norwegian Blue parrot calculation.
   final bool isNailed; // Whether the parrot is nailed to its perch.
   const NorwegianBlueParrot({required this.voltage, required this.isNailed});
 

@@ -1,4 +1,3 @@
-import 'package:approval_dart/approval_dart.dart';
 import 'package:expense_report/expense_report.dart';
 
 import 'expense_report_test.dart';
@@ -12,5 +11,5 @@ void runApprovalTests(List<Expense> input) {
   final DateTime date = DateTime(2022, 9, 1, 0, 0, 0, 0, 0);
 
   expenseReport.printReport(input, date: date);
-  ApprovalDart.saveApprovedCase(expenseReport.logs.join('\n'), filePath: "approved_cases.txt");
+  // Approvals.saveApprovedCase(expenseReport.logs.join('\n'), filePath: "approved_cases.txt");
 }

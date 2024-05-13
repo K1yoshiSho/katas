@@ -1,4 +1,4 @@
-import 'package:approval_dart/approval_dart.dart';
+import 'package:approval_tests/approval_tests.dart';
 import 'package:expense_report/expense_report.dart';
 import 'package:test/test.dart';
 
@@ -22,7 +22,12 @@ void main() {
 
     test('printReport', () {
       expenseReport.printReport(input, date: date);
-      ApprovalDart.verify(expenseReport.logs.join('\n'), filePath: "approved_cases.txt");
+      Approvals.verify(
+        expenseReport.logs.join('\n'),
+        options: Options(
+          approveResult: true,
+        ),
+      );
     });
   });
 }

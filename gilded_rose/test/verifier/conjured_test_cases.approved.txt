@@ -1,0 +1,12 @@
+Item{name: Conjured Mana Cake, sellIn: -2, quality: -1}
+Item{name: Conjured Mana Cake, sellIn: -2, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: -2, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: -2, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: -1, quality: -1}
+Item{name: Conjured Mana Cake, sellIn: -1, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: -1, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: -1, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: 1, quality: -1}
+Item{name: Conjured Mana Cake, sellIn: 1, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: 1, quality: 0}
+Item{name: Conjured Mana Cake, sellIn: 1, quality: 1}

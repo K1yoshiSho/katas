@@ -6,5 +6,6 @@ final class TennisScenario {
   final int secondPlayerScore;
   final String expectedScore;
 
-  const TennisScenario(this.firstPlayerScore, this.secondPlayerScore, this.expectedScore);
+  const TennisScenario(
+      this.firstPlayerScore, this.secondPlayerScore, this.expectedScore);
 }

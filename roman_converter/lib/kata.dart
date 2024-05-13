@@ -1,7 +1,21 @@
 // Define a class named RomanConvert.
 final class RomanConvert {
   // Declare a constant list of integers representing all basic possible roman numerals in decimal form.
-  static const List<int> values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  static const List<int> values = [
+    1000,
+    900,
+    500,
+    400,
+    100,
+    90,
+    50,
+    40,
+    10,
+    9,
+    5,
+    4,
+    1
+  ];
 
   // Declare a constant map that pairs each integer (key) with its corresponding roman numeral (value).
   static const Map<int, String> symbols = {

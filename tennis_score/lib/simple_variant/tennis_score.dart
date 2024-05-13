@@ -5,7 +5,12 @@ import 'package:tennis_score/enums/player.dart';
 /// `TennisGame` class is used to simulate a tennis game.
 class SimpleTennisGameImp implements TennisGame {
   /// `_scoreNames` is a list of score names in a tennis game.
-  static const List<String> _scoreNames = ['love', 'fifteen', 'thirty', 'forty'];
+  static const List<String> _scoreNames = [
+    'love',
+    'fifteen',
+    'thirty',
+    'forty'
+  ];
 
   // ============`Properties`============
 
@@ -50,7 +55,9 @@ class SimpleTennisGameImp implements TennisGame {
   /// 'deuce' state from normal scoring calculations.
 
   bool _isNormalScore() {
-    return _firstPlayerScore < 4 && _secondPlayerScore < 4 && (_firstPlayerScore + _secondPlayerScore != 6);
+    return _firstPlayerScore < 4 &&
+        _secondPlayerScore < 4 &&
+        (_firstPlayerScore + _secondPlayerScore != 6);
   }
 
   /// `_normalScore` method returns the normal score of the game in a format understandable in tennis.
@@ -79,7 +86,9 @@ class SimpleTennisGameImp implements TennisGame {
 
     /// Determines the leader based on who has the higher score.
     /// `Player.firstPlayerName` or `Player.secondPlayerName` is assigned to `leader` depending on who is ahead.
-    String leader = _firstPlayerScore > _secondPlayerScore ? Player.firstPlayerName : Player.secondPlayerName;
+    String leader = _firstPlayerScore > _secondPlayerScore
+        ? Player.firstPlayerName
+        : Player.secondPlayerName;
 
     /// Calculates the absolute score difference between the two players to determine the margin of lead.
     int scoreDifference = (_firstPlayerScore - _secondPlayerScore).abs();
