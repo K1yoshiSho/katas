@@ -5,8 +5,6 @@
 
 # Arlo's Commit Notation Cheat Sheet
 
-# Arlo's Commit Notation Cheat Sheet
-
 ## Risk Categories
 | Symbol | Risk Description                     |
 |--------|--------------------------------------|
