@@ -1,7 +1,10 @@
 part of '../../expense_report.dart';
 
 class Expense {
-  ExpenseType type = ExpenseType.dinner;
-  int amount = 0;
-  Expense(this.type, this.amount);
+  final ExpenseType type;
+  final int amount;
+  const Expense({
+    required this.type,
+    this.amount = 0,
+  });
 }

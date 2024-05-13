@@ -2,14 +2,14 @@ import 'package:approval_tests/approval_tests.dart';
 import 'package:expense_report/expense_report.dart';
 import 'package:test/test.dart';
 
-final input = [
-  Expense(ExpenseType.dinner, 1),
-  Expense(ExpenseType.breakfast, 2),
-  Expense(ExpenseType.carRental, 4),
-  Expense(ExpenseType.dinner, 5000),
-  Expense(ExpenseType.dinner, 5001),
-  Expense(ExpenseType.breakfast, 1000),
-  Expense(ExpenseType.breakfast, 1001),
+const input = [
+  Expense(type: ExpenseType.dinner, amount: 1),
+  Expense(type: ExpenseType.breakfast, amount: 2),
+  Expense(type: ExpenseType.carRental, amount: 4),
+  Expense(type: ExpenseType.dinner, amount: 5000),
+  Expense(type: ExpenseType.dinner, amount: 5001),
+  Expense(type: ExpenseType.breakfast, amount: 1000),
+  Expense(type: ExpenseType.breakfast, amount: 1001),
 ];
 void main() {
   late TestableExpenseReport expenseReport;
