@@ -27,14 +27,14 @@ class ExpenseReport {
       mealAmount = expense.amount;
     }
 
-    final String expenseName = switch (expense.type) {
-      ExpenseType.dinner => 'Dinner',
-      ExpenseType.breakfast => 'Breakfast',
-      ExpenseType.carRental => 'Car Rental',
-    };
+    // final String expenseName = switch (expense.type) {
+    //   ExpenseType.dinner => 'Dinner',
+    //   ExpenseType.breakfast => 'Breakfast',
+    //   ExpenseType.carRental => 'Car Rental',
+    // };
 
     final mealOverExpensesMarker = isOverExpensed(expense) ? 'X' : ' ';
-    log('$expenseName\t${expense.amount}\t$mealOverExpensesMarker');
+    log('${expense.type.name}\t${expense.amount}\t$mealOverExpensesMarker');
     totalAmount = expense.amount;
 
     updateExpenses(mealAmount, totalAmount);
