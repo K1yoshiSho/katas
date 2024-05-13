@@ -11,7 +11,7 @@ final class BackstagePassesTAFKAL80ETC extends Item {
         );
 
   @override
-  updateQuality() {
+  void updateQuality() {
     if (quality < 50) {
       upgrade(by: 1);
 

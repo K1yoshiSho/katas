@@ -13,7 +13,7 @@ final input = [
 ];
 void main() {
   late TestableExpenseReport expenseReport;
-  final DateTime date = DateTime(2022, 9, 1, 0, 0, 0, 0, 0);
+  final DateTime date = DateTime(2022, 9);
 
   group('ExpenseReport', () {
     setUp(() {
@@ -24,8 +24,8 @@ void main() {
       expenseReport.printReport(input, date: date);
       Approvals.verify(
         expenseReport.logs.join('\n'),
-        options: Options(
-          approveResult: true,
+        options: const Options(
+          comparator: IDEComparator(ide: ComparatorIDE.visualStudioCode),
         ),
       );
     });

@@ -10,7 +10,7 @@ const allTestCases = [
     "Sulfuras, Hand of Ragnaros",
   ],
   [-1, 0, 5, 6, 10, 11],
-  [-1, 0, 1, 49, 50]
+  [-1, 0, 1, 49, 50],
 ];
 
 const conjuredTestCases = [

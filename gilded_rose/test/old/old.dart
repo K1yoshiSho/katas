@@ -24,26 +24,38 @@ void main() {
       expectedResults: [
         "Aged Brie, 1, 50",
         "Aged Brie, 1, 1",
-        "Aged Brie, -2, 6"
+        "Aged Brie, -2, 6",
       ],
     ),
     _Test(
       name: 'Backstage Passes to a TAFKAL80ETC concert:',
       items: [
-        Item('Backstage passes to a TAFKAL80ETC concert',
-            sellIn: 10, quality: 10),
-        Item('Backstage passes to a TAFKAL80ETC concert',
-            sellIn: 5, quality: 10),
-        Item('Backstage passes to a TAFKAL80ETC concert',
-            sellIn: -1, quality: 4),
-        Item('Backstage passes to a TAFKAL80ETC concert',
-            sellIn: 9, quality: 2),
+        Item(
+          'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 10,
+          quality: 10,
+        ),
+        Item(
+          'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 5,
+          quality: 10,
+        ),
+        Item(
+          'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: -1,
+          quality: 4,
+        ),
+        Item(
+          'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 9,
+          quality: 2,
+        ),
       ],
       expectedResults: [
         "Backstage passes to a TAFKAL80ETC concert, 9, 12",
         "Backstage passes to a TAFKAL80ETC concert, 4, 13",
         "Backstage passes to a TAFKAL80ETC concert, -2, 0",
-        "Backstage passes to a TAFKAL80ETC concert, 8, 4"
+        "Backstage passes to a TAFKAL80ETC concert, 8, 4",
       ],
     ),
     _Test(
@@ -53,13 +65,15 @@ void main() {
     ),
   ];
 
-  for (var testItem in tests) {
+  for (final testItem in tests) {
     group(testItem.name, () {
       for (var i = 0; i < testItem.items.length; i++) {
         test('Test item $i', () {
           final app = _addItems([testItem.items[i]]);
           expect(
-              app.items.first.toString(), equals(testItem.expectedResults[i]));
+            app.items.first.toString(),
+            equals(testItem.expectedResults[i]),
+          );
         });
       }
     });

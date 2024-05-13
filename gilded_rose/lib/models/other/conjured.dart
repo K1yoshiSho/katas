@@ -11,7 +11,7 @@ final class ConjuredManaCake extends Item {
         );
 
   @override
-  updateQuality() {
+  void updateQuality() {
     degrade(by: 2);
     advanceOneDay();
 

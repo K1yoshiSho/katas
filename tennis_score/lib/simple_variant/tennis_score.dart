@@ -9,7 +9,7 @@ class SimpleTennisGameImp implements TennisGame {
     'love',
     'fifteen',
     'thirty',
-    'forty'
+    'forty',
   ];
 
   // ============`Properties`============
@@ -54,11 +54,10 @@ class SimpleTennisGameImp implements TennisGame {
   /// where special scoring rules begin to apply ('deuce', 'advantage', 'win'). This condition is used to exclude the
   /// 'deuce' state from normal scoring calculations.
 
-  bool _isNormalScore() {
-    return _firstPlayerScore < 4 &&
-        _secondPlayerScore < 4 &&
-        (_firstPlayerScore + _secondPlayerScore != 6);
-  }
+  bool _isNormalScore() =>
+      _firstPlayerScore < 4 &&
+      _secondPlayerScore < 4 &&
+      (_firstPlayerScore + _secondPlayerScore != 6);
 
   /// `_normalScore` method returns the normal score of the game in a format understandable in tennis.
   String _normalScore() {
@@ -86,12 +85,12 @@ class SimpleTennisGameImp implements TennisGame {
 
     /// Determines the leader based on who has the higher score.
     /// `Player.firstPlayerName` or `Player.secondPlayerName` is assigned to `leader` depending on who is ahead.
-    String leader = _firstPlayerScore > _secondPlayerScore
+    final String leader = _firstPlayerScore > _secondPlayerScore
         ? Player.firstPlayerName
         : Player.secondPlayerName;
 
     /// Calculates the absolute score difference between the two players to determine the margin of lead.
-    int scoreDifference = (_firstPlayerScore - _secondPlayerScore).abs();
+    final int scoreDifference = (_firstPlayerScore - _secondPlayerScore).abs();
 
     /// Checks if the score difference is 1, which indicates one player has a slight edge but hasn't won yet.
     if (scoreDifference == 1) {

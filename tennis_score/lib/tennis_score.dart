@@ -1,7 +1,7 @@
 import 'package:tennis_score/base/tennis_game.dart';
 import 'package:tennis_score/constant/all_scenarios.dart';
-import 'package:tennis_score/enums/player.dart';
 import 'package:tennis_score/constant/score.dart';
+import 'package:tennis_score/enums/player.dart';
 
 /// `TennisGame` class is used to simulate a tennis game.
 class TennisGameImp implements TennisGame {
@@ -70,14 +70,12 @@ class TennisGameImp implements TennisGame {
   }
 
   /// Check if the player has advantage
-  bool _hasAdvantage(int thisPlayer, int otherPlayer) {
-    return thisPlayer > 3 && thisPlayer == otherPlayer + 1;
-  }
+  bool _hasAdvantage(int thisPlayer, int otherPlayer) =>
+      thisPlayer > 3 && thisPlayer == otherPlayer + 1;
 
   /// Check if the player has won
-  bool _isWin(int thisPlayer, int otherPlayer) {
-    return thisPlayer >= 4 && thisPlayer >= otherPlayer + 2;
-  }
+  bool _isWin(int thisPlayer, int otherPlayer) =>
+      thisPlayer >= 4 && thisPlayer >= otherPlayer + 2;
 
   /// Update the score based on the current score
   int _updateScore(int thisPlayer, int otherPlayer) {

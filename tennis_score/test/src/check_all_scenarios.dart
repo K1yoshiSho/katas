@@ -6,8 +6,10 @@ part of '../tennis_score_test.dart';
 /// The function takes two parameters:
 /// - `@game` - A TennisGame object where points can be added for players.
 /// - `@testScenario` - A testing scenario including player scores and the expected game score.
-void _checkAllScenarios(
-    {required TennisGame game, required TennisScenario testScenario}) {
+void _checkAllScenarios({
+  required TennisGame game,
+  required TennisScenario testScenario,
+}) {
   final highestScore =
       max(testScenario.firstPlayerScore, testScenario.secondPlayerScore);
 

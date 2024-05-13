@@ -11,7 +11,7 @@ final class SulfurasHandOfRagnaros extends Item {
         );
 
   @override
-  updateQuality() {
+  void updateQuality() {
     // Sulfuras never has to be sold or decreases in quality
   }
 }

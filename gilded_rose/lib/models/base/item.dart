@@ -13,7 +13,7 @@ final class Item {
   static const String sulfuras = 'Sulfuras, Hand of Ragnaros';
   static const String conjuredManaCake = 'Conjured Mana Cake';
 
-  static Item makeItem(
+  Item makeItem(
     String name, {
     required int sellIn,
     required int quality,
@@ -32,26 +32,20 @@ final class Item {
     }
   }
 
-  factory Item.fromJson(Map<String, dynamic> json) {
-    return Item(
-      json['name'],
-      sellIn: json['sellIn'],
-      quality: json['quality'],
-    );
-  }
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
+        json['name'] as String? ?? '',
+        sellIn: json['sellIn'] as int? ?? 0,
+        quality: json['quality'] as int? ?? 0,
+      );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'sellIn': sellIn,
-      'quality': quality,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'sellIn': sellIn,
+        'quality': quality,
+      };
 
   @override
-  String toString() {
-    return 'Item{name: $name, sellIn: $sellIn, quality: $quality}';
-  }
+  String toString() => 'Item{name: $name, sellIn: $sellIn, quality: $quality}';
 
   void updateQuality() {
     degrade(by: 1);

@@ -12,7 +12,7 @@ final class GildedRose {
   });
 
   void updateQuality() {
-    for (var element in items) {
+    for (final element in items) {
       element.updateQuality();
     }
   }
