@@ -5,74 +5,40 @@
 
 # Arlo's Commit Notation Cheat Sheet
 
-## Risk Levels
+# Arlo's Commit Notation Cheat Sheet
 
-| Risk Level             | Code        | Example                         | Meaning                                              |
-|------------------------|-------------|---------------------------------|------------------------------------------------------|
-| **Known safe**         | lowercase   | `r - Extract method Applesauce` | Addresses all known and unknown risks.               |
-| **Validated**          | uppercase   | `R - Extract method Applesauce` | Addresses all known risks.                           |
-| **Risky**              | uppercase!! | `R!! Extract method Applesauce` | Some known risks remain unverified.                  |
-| **(Probably) Broken**  | uppercase** | `R** Start extracting method`   | No risk attestation.                                 |
+## Risk Categories
+| Symbol | Risk Description                     |
+|--------|--------------------------------------|
+| .      | Provable (changes are easy to verify)|
+| -      | Tested (changes have been tested)    |
+| !      | Single Action (single, atomic change)|
+| @      | Other (miscellaneous changes)        |
 
-## Intention Prefixes
+## Action Categories
+| Symbol | Action Description                       |
+|--------|------------------------------------------|
+| r      | Refactoring (improving code structure)   |
+| e      | Environment (non-code changes)           |
+| d      | Documentation (changes to documentation) |
+| t      | Test only (changes to tests)             |
+| F      | Feature (new features)                   |
+| B      | Bugfix (fixing bugs)                     |
 
-| Prefix | Name         | Intention                                                      |
-|--------|--------------|----------------------------------------------------------------|
-| F      | Feature      | Change or extend one aspect of program behavior without altering others. |
-| B      | Bugfix       | Repair one existing, undesirable program behavior without altering any others. |
-| R      | Refactoring  | Change implementation without changing program behavior.      |
-| D      | Documentation| Change something which communicates to team members and does not impact program behavior. |
+## Examples
+- `.r rename variable`: Provable refactoring change, such as renaming a variable.
+- `-e update build script`: Tested change to the environment, such as updating a build script.
+- `!B fixed spelling on label`: Single action bugfix, like fixing a spelling error on a label.
+- `@d update README`: Miscellaneous documentation change, like updating the README file.
 
-## Detailed Notations
+## Commit Message Guidelines
+- Always use the appropriate risk and action symbols to describe the change.
+- Provide a concise description of the change after the symbols.
 
-### Feature Notation
+## Example Commit Messages
+- `.r rename variable`: This commit renames a variable, which is a provable refactoring change.
+- `-e update build script`: This commit updates a build script, indicating a tested environment change.
+- `!B fixed spelling on label`: This commit fixes a spelling error on a label, a single action bugfix.
+- `@d update README`: This commit updates the README file, categorized as other documentation change.
 
-| Code   | Known Approaches |
-|--------|------------------|
-| `f - ` | None known       |
-| `F - ` | Change <= 8 LoC, fully unit tested, includes new/changed unit tests. |
-| `F!!`  | Includes unit tests for new behavior. |
-| `F**`  | No automatic tests, or unfinished implementation. |
-
-### Bugfix Notation
-
-| Code   | Known Approaches |
-|--------|------------------|
-| `b - ` | None known       |
-| `B - ` | Reviewed with customer rep, Change <= 8 LoC, original behavior captured in a unit test, includes 1 changed unit test. |
-| `B!!`  | Includes unit tests for new behavior. |
-| `B**`  | No automatic tests, or unfinished implementation. |
-
-### Refactoring Notation
-
-| Code   | Known Approaches |
-|--------|------------------|
-| `r - ` | Provable refactoring or test-supported procedural refactoring within test code. |
-| `R - ` | Test-supported Procedural Refactoring. |
-| `R!!`  | Single refactoring, but executed by editing code or without whole-project test coverage. |
-| `R**`  | Remodeled by editing code. |
-
-### Documentation Notation
-
-| Code   | Known Approaches |
-|--------|------------------|
-| `d - ` | Developer-visible documentation, not in a source file, or verified to generate byte-identical compilation. |
-| `D - ` | Dev-impacting only, but changes compilation or process. |
-| `D!!`  | Alters an important process. |
-| `D**`  | Trying out a process change for information gain. |
-
-## Refactoring Approaches
-
-| Type                                 | Description                                             |
-|--------------------------------------|---------------------------------------------------------|
-| Provable Refactorings                | Automated or scripted manual refactoring with verification. |
-| Test-supported Procedural Refactorings | Named refactoring, highly tested product or new uncalled code, follows published steps. |
-
-## Small Features and Bug Fixes
-
-- Changes > 8 lines of code are high risk.
-- Refactor before adding small features or fixes.
-
-## End-User Documentation
-
-- Use feature, bugfix, or refactoring codes accordingly.
+By using this notation, you can clearly and concisely describe the nature and risk of your changes in commit messages.
