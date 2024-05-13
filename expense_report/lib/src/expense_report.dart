@@ -10,25 +10,38 @@ class ExpenseReport {
 
     log('Expense Report: $date');
     for (final expense in expenses) {
-      if (expense.type == ExpenseType.dinner || expense.type == ExpenseType.breakfast) {
-        mealExpenses += expense.amount;
-      }
-      final String expenseName = switch (expense.type) {
-        ExpenseType.dinner => 'Dinner',
-        ExpenseType.breakfast => 'Breakfast',
-        ExpenseType.carRental => 'Car Rental',
-      };
-
-      final mealOverExpensesMarker = isOverExpensed(expense) ? 'X' : ' ';
-      log('$expenseName\t${expense.amount}\t$mealOverExpensesMarker');
-      totalExpenses += expense.amount;
+      processExpense(expense, (meal, total) {
+        mealExpenses += meal;
+        totalExpenses += total;
+      });
     }
     log('Meal Expenses: $mealExpenses');
     log('Total Expenses: $totalExpenses');
   }
 
+  void processExpense(Expense expense, void Function(int, int) updateExpenses) {
+    var mealAmount = 0;
+    var totalAmount = 0;
+
+    if (expense.type == ExpenseType.dinner || expense.type == ExpenseType.breakfast) {
+      mealAmount = expense.amount;
+    }
+
+    final String expenseName = switch (expense.type) {
+      ExpenseType.dinner => 'Dinner',
+      ExpenseType.breakfast => 'Breakfast',
+      ExpenseType.carRental => 'Car Rental',
+    };
+
+    final mealOverExpensesMarker = isOverExpensed(expense) ? 'X' : ' ';
+    log('$expenseName\t${expense.amount}\t$mealOverExpensesMarker');
+    totalAmount = expense.amount;
+
+    updateExpenses(mealAmount, totalAmount);
+  }
+
   bool isOverExpensed(Expense expense) =>
-      expense.type == ExpenseType.dinner && expense.amount > 5000 || expense.type == ExpenseType.breakfast && expense.amount > 1000;
+      (expense.type == ExpenseType.dinner && expense.amount > 5000) || (expense.type == ExpenseType.breakfast && expense.amount > 1000);
 
   void log(Object? object) => ApprovalLogger.log(object.toString());
 }
