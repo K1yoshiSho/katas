@@ -1,5 +1,6 @@
 import 'package:approval_tests/approval_tests.dart';
-import 'package:expense_report/src/another_way.dart';
+import 'package:expense_report/expense_report.dart';
+
 import 'package:test/test.dart';
 
 const input = [

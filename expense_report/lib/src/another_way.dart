@@ -18,18 +18,12 @@ enum ExpenseType {
 }
 
 extension ExpenseExtension on Expense {
-  Service get service {
-    switch (type) {
-      case ExpenseType.breakfast:
-        return const Breakfast();
-      case ExpenseType.lunch:
-        return const Lunch();
-      case ExpenseType.dinner:
-        return const Dinner();
-      case ExpenseType.carRental:
-        return const CarRental();
-    }
-  }
+  Service get service => switch (type) {
+        ExpenseType.breakfast => Breakfast(amount: amount),
+        ExpenseType.lunch => Lunch(amount: amount),
+        ExpenseType.dinner => Dinner(amount: amount),
+        ExpenseType.carRental => CarRental(amount: amount),
+      };
 }
 
 abstract class Service {
@@ -113,9 +107,8 @@ class ExpenseReport {
     log('Total Expenses: $totalExpenses');
   }
 
-  int _calculateMealExpenses(List<Expense> expenses) {
-    return expenses.where((expense) => expense.service is MealExpense).fold(0, (total, expense) => total + expense.amount);
-  }
+  int _calculateMealExpenses(List<Expense> expenses) =>
+      expenses.where((expense) => expense.service is MealExpense).fold(0, (total, expense) => total + expense.amount);
 
   void log(Object? object) => ApprovalLogger.log(object.toString());
 }
