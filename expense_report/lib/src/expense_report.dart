@@ -26,12 +26,8 @@ class ExpenseReport {
   }
 
   int _calculateMealExpenses(List<Expense> expenses) {
-    int _mealExpenses = 0;
     final meals = expenses.where((expense) => expense.service.isMeal);
-    for (final expense in meals) {
-      _mealExpenses += expense.amount;
-    }
-    return _mealExpenses;
+    return meals.fold(0, (total, expense) => total + expense.amount);
   }
 
   void _writeExpenseLineFor(Expense expense) => log(
