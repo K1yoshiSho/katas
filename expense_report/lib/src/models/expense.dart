@@ -1,7 +1,7 @@
 part of '../../expense_report.dart';
 
 class Expense {
-  final ExpenseType type;
+  final ExpenseTypeEnum type;
   final int amount;
   const Expense({
     required this.type,

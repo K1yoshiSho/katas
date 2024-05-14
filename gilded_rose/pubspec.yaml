@@ -10,7 +10,7 @@ environment:
 # Add regular dependencies here.
 dependencies:
   # path: ^1.8.0
-  approval_tests: ^0.4.4
+  approval_tests: ^0.4.5
 
 dev_dependencies:
   sizzle_lints: ^2.0.2
