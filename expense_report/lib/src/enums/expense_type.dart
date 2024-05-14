@@ -1,6 +1,6 @@
 part of '../../expense_report.dart';
 
-enum ExpenseTypeEnum {
+enum ExpenseType {
   dinner('Dinner'),
   breakfast('Breakfast'),
   carRental('Car Rental'),
@@ -8,5 +8,5 @@ enum ExpenseTypeEnum {
 
   final String name;
 
-  const ExpenseTypeEnum(this.name);
+  const ExpenseType(this.name);
 }

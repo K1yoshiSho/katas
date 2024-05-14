@@ -1,13 +1,13 @@
-import 'package:expense_report/src/models/base/expense.dart';
+part of '../../../expense_report.dart';
 
-class CarRental implements Service {
-  @override
-  final int amount;
-
+class CarRental extends Service {
   const CarRental({
-    required this.amount,
+    required super.amount,
   });
 
   @override
   String get name => 'Car Rental';
+
+  @override
+  bool get isOverLimit => false;
 }

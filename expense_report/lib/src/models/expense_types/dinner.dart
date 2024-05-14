@@ -1,11 +1,8 @@
-import 'package:expense_report/src/models/base/meal_expende.dart';
+part of '../../../expense_report.dart';
 
-class Dinner implements MealExpense {
-  @override
-  final int amount;
-
+class Dinner extends Service with MealExpense {
   const Dinner({
-    required this.amount,
+    required super.amount,
   });
 
   @override
