@@ -16,7 +16,6 @@ extension ExpenseExtension on Expense {
       };
 }
 
-
 extension ServiceExtension on Service {
   bool get isMeal => this is MealExpense;
 }
@@ -95,14 +94,18 @@ class Expense {
   });
 }
 
-
 class ExpenseReport {
+  final Printer printer;
+
+  const ExpenseReport({
+    required this.printer,
+  });
+
   void printReport(
     List<Expense> expenses, {
     required DateTime date,
   }) {
-
-    final  services = expenses.map((expense) => expense.service).toList();
+    final services = expenses.map((expense) => expense.service).toList();
     _writeHeader(date);
 
     _writeExpenses(services);
@@ -132,5 +135,16 @@ class ExpenseReport {
         '${service.name}\t${service.amount}\t${service.isOverLimit ? 'X' : ' '}',
       );
 
-  void log(Object? object) => ApprovalLogger.log(object.toString());
+  void log(Object? object) => printer.print(object);
+}
+
+abstract interface class Printer {
+  void print(Object? object);
+}
+
+class ConsolePrinter implements Printer {
+  const ConsolePrinter();
+
+  @override
+  void print(Object? object) => print(object);
 }
