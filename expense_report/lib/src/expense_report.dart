@@ -7,19 +7,6 @@ enum ExpenseType {
   lunch;
 }
 
-extension ExpenseExtension on Expense {
-  Service get service => switch (type) {
-        ExpenseType.breakfast => Breakfast(amount: amount),
-        ExpenseType.lunch => Lunch(amount: amount),
-        ExpenseType.dinner => Dinner(amount: amount),
-        ExpenseType.carRental => CarRental(amount: amount),
-      };
-}
-
-extension ServiceExtension on Service {
-  bool get isMeal => this is MealExpense;
-}
-
 mixin MealExpense on Service {
   int get expenseLimit;
 
@@ -34,6 +21,8 @@ abstract class Service {
 
   String get name;
   bool get isOverLimit;
+
+  bool get isMeal => this is MealExpense;
 }
 
 class Breakfast extends Service with MealExpense {
@@ -92,6 +81,13 @@ class Expense {
     required this.type,
     this.amount = 0,
   });
+
+   Service get service => switch (type) {
+        ExpenseType.breakfast => Breakfast(amount: amount),
+        ExpenseType.lunch => Lunch(amount: amount),
+        ExpenseType.dinner => Dinner(amount: amount),
+        ExpenseType.carRental => CarRental(amount: amount),
+      };
 }
 
 class ExpenseReport {

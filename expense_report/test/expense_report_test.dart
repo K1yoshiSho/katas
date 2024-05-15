@@ -15,21 +15,21 @@ const input = [
   Expense(type: ExpenseType.lunch, amount: 2001),
 ];
 void main() {
-  late TestableExpenseReport expenseReport;
-  late TestableConsolePrinter consolePrinter;
+  late final ExpenseReport expenseReport;
+  late final TestableConsolePrinter consolePrinter;
   final DateTime date = DateTime(2022, 9);
 
   group('ExpenseReport', () {
     setUp(() {
       consolePrinter = TestableConsolePrinter();
-      expenseReport = TestableExpenseReport(printer: consolePrinter);
+      expenseReport = ExpenseReport(printer: consolePrinter);
       
     });
 
     test('printReport', () {
       expenseReport.printReport(input, date: date);
       Approvals.verify(
-        consolePrinter.logs.join('\n'),
+        consolePrinter.output,
         options: const Options(
           comparator: IDEComparator(ide: ComparatorIDE.visualStudioCode),
         ),
@@ -38,22 +38,14 @@ void main() {
   });
 }
 
-final class TestableExpenseReport extends ExpenseReport {
-
-  TestableExpenseReport({required super.printer});
-
-  final List<String> logs = [];
-  
-  @override
-  void log(Object? object) {
-    printer.print(object);
-  }
-}
 
 final class TestableConsolePrinter extends ConsolePrinter {
-  final List<String> logs = [];
+  final List<String> _logs = [];
+  
   @override
   void print(Object? object) {
-    logs.add(object.toString());
+    _logs.add(object.toString());
   }
+
+  String get output => _logs.join('\n');
 }
