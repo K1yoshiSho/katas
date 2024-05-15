@@ -6,5 +6,7 @@ Dinner	5000
 Dinner	5001	X
 Breakfast	1000	 
 Breakfast	1001	X
-Meal Expenses: 12005
-Total Expenses: 12009
+Lunch	1001	 
+Lunch	2001	X
+Meal Expenses: 15007
+Total Expenses: 15011

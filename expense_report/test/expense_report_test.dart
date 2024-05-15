@@ -11,6 +11,8 @@ const input = [
   Expense(type: ExpenseType.dinner, amount: 5001),
   Expense(type: ExpenseType.breakfast, amount: 1000),
   Expense(type: ExpenseType.breakfast, amount: 1001),
+  Expense(type: ExpenseType.lunch, amount: 1001),
+  Expense(type: ExpenseType.lunch, amount: 2001),
 ];
 void main() {
   late TestableExpenseReport expenseReport;
