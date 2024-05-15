@@ -23,7 +23,6 @@ void main() {
     setUp(() {
       consolePrinter = TestableConsolePrinter();
       expenseReport = ExpenseReport(printer: consolePrinter);
-      
     });
 
     test('printReport', () {
@@ -38,10 +37,9 @@ void main() {
   });
 }
 
-
 final class TestableConsolePrinter extends ConsolePrinter {
   final List<String> _logs = [];
-  
+
   @override
   void print(Object? object) {
     _logs.add(object.toString());

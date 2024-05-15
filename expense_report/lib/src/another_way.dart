@@ -102,13 +102,15 @@ class ExpenseReport {
 
   void _writeTotals(List<Expense> expenses) {
     final mealExpenses = _calculateMealExpenses(expenses);
-    final totalExpenses = expenses.fold(0, (total, expense) => total + expense.amount);
+    final totalExpenses =
+        expenses.fold(0, (total, expense) => total + expense.amount);
     log('Meal Expenses: $mealExpenses');
     log('Total Expenses: $totalExpenses');
   }
 
-  int _calculateMealExpenses(List<Expense> expenses) =>
-      expenses.where((expense) => expense.service is MealExpense).fold(0, (total, expense) => total + expense.amount);
+  int _calculateMealExpenses(List<Expense> expenses) => expenses
+      .where((expense) => expense.service is MealExpense)
+      .fold(0, (total, expense) => total + expense.amount);
 
   void log(Object? object) => ApprovalLogger.log(object.toString());
 }

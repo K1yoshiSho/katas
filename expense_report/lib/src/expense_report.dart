@@ -10,7 +10,6 @@ enum ExpenseType {
 mixin MealExpense on Service {
   int get expenseLimit;
 
-  @override
   bool get isOverLimit => amount > expenseLimit;
 }
 
@@ -20,57 +19,63 @@ abstract class Service {
   const Service({required this.amount});
 
   String get name;
-  bool get isOverLimit;
-
   bool get isMeal => this is MealExpense;
 }
 
 class Breakfast extends Service with MealExpense {
+  static const String _name = 'Breakfast';
+  static const int _expenseLimit = 1000;
+
   const Breakfast({
     required super.amount,
   });
 
   @override
-  int get expenseLimit => 1000;
+  int get expenseLimit => _expenseLimit;
 
   @override
-  String get name => 'Breakfast';
+  String get name => _name;
 }
 
 class CarRental extends Service {
+  static const String _name = 'Car Rental';
+
   const CarRental({
     required super.amount,
   });
 
   @override
-  String get name => 'Car Rental';
-
-  @override
-  bool get isOverLimit => false;
+  String get name => _name;
 }
 
 class Dinner extends Service with MealExpense {
+  static const String _name = 'Dinner';
+  static const int _expenseLimit = 5000;
+
   const Dinner({
     required super.amount,
   });
 
   @override
-  int get expenseLimit => 5000;
+  int get expenseLimit => _expenseLimit;
 
   @override
-  String get name => 'Dinner';
+  String get name => _name;
 }
 
 class Lunch extends Service with MealExpense {
+  static const String _name = 'Lunch';
+  static const int _expenseLimit = 2000;
+
   const Lunch({
     required super.amount,
   });
 
   @override
-  int get expenseLimit => 2000;
+  int get expenseLimit => _expenseLimit;
 
   @override
-  String get name => 'Lunch';
+  String get name => _name;
 }
 
 class Expense {
@@ -82,7 +87,7 @@ class Expense {
     this.amount = 0,
   });
 
-   Service get service => switch (type) {
+  Service get service => switch (type) {
         ExpenseType.breakfast => Breakfast(amount: amount),
         ExpenseType.lunch => Lunch(amount: amount),
         ExpenseType.dinner => Dinner(amount: amount),
@@ -113,13 +118,19 @@ class ExpenseReport {
     log('Expense Report: $date');
   }
 
-  void _writeExpenses(List<Service> expenses) {
-    expenses.forEach(_writeExpenseLineFor);
+  void _writeExpenses(List<Service> services) {
+    for (final service in services) {
+      _writeExpenseLineFor(service);
+    }
   }
 
   void _writeTotalsFor(List<Service> services) {
-    log('Meal Expenses: ${_calculateMealExpenses(services)}');
-    log('Total Expenses: ${services.fold(0, (total, service) => total + service.amount)}');
+    final mealExpenses = _calculateMealExpenses(services);
+    final totalExpenses =
+        services.fold<int>(0, (total, service) => total + service.amount);
+
+    log('Meal Expenses: $mealExpenses');
+    log('Total Expenses: $totalExpenses');
   }
 
   int _calculateMealExpenses(List<Service> services) {
@@ -127,9 +138,10 @@ class ExpenseReport {
     return meals.fold(0, (total, service) => total + service.amount);
   }
 
-  void _writeExpenseLineFor(Service service) => log(
-        '${service.name}\t${service.amount}\t${service.isOverLimit ? 'X' : ' '}',
-      );
+ void _writeExpenseLineFor(Service service) {
+    final overLimitIndicator = (service is MealExpense && service.isOverLimit) ? 'X' : ' ';
+    log('${service.name}\t${service.amount}\t$overLimitIndicator');
+  }
 
   void log(Object? object) => printer.print(object);
 }
